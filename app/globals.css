@@ -1,0 +1,74 @@
+:root { --base:#2a6fff; }
+html { scroll-behavior:smooth; }
+
+/* Enhanced layered background */
+body {
+  background:
+    radial-gradient(800px 400px at 20% -10%, rgba(42,111,255,0.25), transparent),
+    radial-gradient(600px 300px at 80% 110%, rgba(255,255,255,0.05), transparent),
+    linear-gradient(180deg, #0b1226 0%, #0e1838 60%, #091024 100%);
+  background-attachment: fixed;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Soft animated blue glow orbs */
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+.bg-orbs::before,
+.bg-orbs::after {
+  content: "";
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.22;
+  animation: float 20s infinite alternate ease-in-out;
+}
+.bg-orbs::before {
+  background: #2a6fff;
+  top: -10%;
+  left: -10%;
+  animation-delay: 0s;
+}
+.bg-orbs::after {
+  background: #7aa3ff;
+  bottom: -10%;
+  right: -10%;
+  animation-delay: 5s;
+}
+@keyframes float {
+  from { transform: translateY(0px) scale(1); opacity: 0.22; }
+  to   { transform: translateY(60px) scale(1.08); opacity: 0.35; }
+}
+
+/* Reusable UI tokens */
+.ring-glow { box-shadow: 0 0 0 6px rgba(42,111,255,.15), 0 30px 80px rgba(42,111,255,.25); }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Glassy cards + buttons */
+@layer utilities {
+  .card {
+    @apply rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm;
+    box-shadow: 0 8px 32px rgba(42,111,255,0.05);
+    transition: all 0.3s ease;
+  }
+  .card:hover {
+    box-shadow: 0 8px 40px rgba(42,111,255,0.15);
+    transform: translateY(-2px);
+  }
+
+  .btn  { @apply inline-flex items-center justify-center px-5 py-3 rounded-full font-semibold transition; }
+  .btn-base { @apply btn bg-base text-white hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-base/60; }
+  .btn-ghost { @apply btn border border-white/20 text-white/90 hover:bg-white/5; }
+  .link { @apply hover:text-white focus:outline-none focus:ring-2 focus:ring-base/60 rounded; }
+  .container-tight { @apply max-w-6xl mx-auto px-4; }
+}
