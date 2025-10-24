@@ -55,57 +55,69 @@ function SocialCard({
     <>
       {/* NAV */}
       <header className="sticky top-0 z-50 backdrop-blur bg-[#0b1226]/70 border-b border-white/10">
-        <div className="container-tight py-4 flex items-center justify-between">
-          <a
-            href="#"
-            className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-base/60 rounded"
-          >
-            <div className="h-9 w-9 rounded-full bg-base grid place-items-center ring-glow">
-              <div className="bg-white h-5 w-5 rounded-full relative">
-                <div className="absolute left-[3px] right-[3px] top-1/2 -translate-y-1/2 h-[4px] bg-base rounded" />
-              </div>
-            </div>
-            <span className="font-extrabold tracking-wide">Based Jiff</span>
-          </a>
+  <div className="container-tight py-4 flex items-center justify-between">
 
-          {/* Desktop */}
-          <nav className="hidden sm:flex gap-6 text-sm text-white/80">
-            <a href="#token" className="link">Token</a>
-            <a href="#how" className="link">How to Buy</a>
-            <a href="#about" className="link">About</a>
-            <a href="#fan" className="link">Fan Flair</a>
-            <a href="#faq" className="link">FAQ</a>
-            <a href="#cta" className="btn-base">Buy</a>
-          </nav>
-
-          {/* Mobile toggle */}
-          <button
-            className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/15 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-base/60"
-            aria-label="Open menu"
-            onClick={() => setOpen(!open)}
-          >
-            <svg width="20" height="20" fill="none" stroke="currentColor" className="opacity-90">
-              <path strokeLinecap="round" strokeWidth="2" d="M3 6h14M3 10h14M3 14h14" />
-            </svg>
-          </button>
+    {/* 🔹 LEFT: LOGO + BRAND */}
+    <a
+      href="#"
+      className="flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-base/60 rounded"
+    >
+      <div className="flex items-center gap-2">
+        <div className="relative h-10 w-10 rounded-full overflow-hidden">
+          {/* Blue glow behind logo */}
+          <div className="absolute inset-0 rounded-full blur-lg bg-[var(--base)] opacity-40 -z-10" />
+          <Image
+            src="/images/logo.png"
+            alt="Based Jiff logo"
+            fill
+            sizes="40px"
+            className="object-contain"
+            priority
+          />
         </div>
+        <span className="font-extrabold tracking-wide">Based Jiff</span>
+      </div>
+    </a>
 
-        {/* Mobile drawer */}
-        {open && (
-          <div className="sm:hidden border-t border-white/10 bg-[#0b1226]/95">
-            <div className="container-tight py-3 grid gap-2 text-sm">
-              <a href="#token" className="py-2 link" onClick={() => setOpen(false)}>Token</a>
-              <a href="#how" className="py-2 link" onClick={() => setOpen(false)}>How to Buy</a>
-              <a href="#about" className="py-2 link" onClick={() => setOpen(false)}>About</a>
-              <a href="#fan" className="py-2 link" onClick={() => setOpen(false)}>Fan Flair</a>
-              <a href="#faq" className="py-2 link" onClick={() => setOpen(false)}>FAQ</a>
-              <a href="#cta" className="py-2" onClick={() => setOpen(false)}>
-                <span className="btn-base w-full">Buy</span>
-              </a>
-            </div>
-          </div>
-        )}
-      </header>
+    {/* 🔹 CENTER/NAV LINKS (Desktop) */}
+    <nav className="hidden sm:flex gap-6 text-sm text-white/80">
+      <a href="#token" className="link">Token</a>
+      <a href="#how" className="link">How to Buy</a>
+      <a href="#about" className="link">About</a>
+      <a href="#fan" className="link">Fan Flair</a>
+      <a href="#faq" className="link">FAQ</a>
+      <a href="#cta" className="btn-base">Buy</a>
+    </nav>
+
+    {/* 🔹 MOBILE MENU BUTTON */}
+    <button
+      className="sm:hidden inline-flex h-10 w-10 items-center justify-center rounded-md border border-white/15 hover:bg-white/5 focus:outline-none focus:ring-2 focus:ring-base/60"
+      aria-label="Open menu"
+      onClick={() => setOpen(!open)}
+    >
+      <svg width="20" height="20" fill="none" stroke="currentColor" className="opacity-90">
+        <path strokeLinecap="round" strokeWidth="2" d="M3 6h14M3 10h14M3 14h14" />
+      </svg>
+    </button>
+  </div>
+
+  {/* 🔹 MOBILE MENU DRAWER */}
+  {open && (
+    <div className="sm:hidden border-t border-white/10 bg-[#0b1226]/95">
+      <div className="container-tight py-3 grid gap-2 text-sm">
+        <a href="#token" className="py-2 link" onClick={() => setOpen(false)}>Token</a>
+        <a href="#how" className="py-2 link" onClick={() => setOpen(false)}>How to Buy</a>
+        <a href="#about" className="py-2 link" onClick={() => setOpen(false)}>About</a>
+        <a href="#fan" className="py-2 link" onClick={() => setOpen(false)}>Fan Flair</a>
+        <a href="#faq" className="py-2 link" onClick={() => setOpen(false)}>FAQ</a>
+        <a href="#cta" className="py-2" onClick={() => setOpen(false)}>
+          <span className="btn-base w-full">Buy</span>
+        </a>
+      </div>
+    </div>
+  )}
+</header>
+
 
       {/* HERO */}
       <section className="relative overflow-hidden">
