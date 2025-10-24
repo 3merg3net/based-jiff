@@ -4,9 +4,44 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { LINKS, CONTRACT_CA, YT_VIDEO_ID } from "./config";
 import FloatingPaws from "./components/FloatingPaws";
+import { JIFF_LINKS, JIFF_STATS } from "./config";
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
+
+  // ------------------------------------------------------
+// SocialCard component helper
+// ------------------------------------------------------
+function SocialCard({
+  label,
+  tagline,
+  href,
+  Icon,
+}: {
+  label: string;
+  tagline: string;
+  href: string;
+  Icon: React.FC;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="card p-5 hover:bg-white/10 transition flex items-center gap-4"
+      aria-label={`${label} — ${tagline}`}
+    >
+      <div className="h-10 w-10 grid place-items-center rounded-xl bg-white/10 text-white/80">
+        <Icon />
+      </div>
+      <div>
+        <div className="font-semibold">{label}</div>
+        <div className="text-xs text-white/60">{tagline}</div>
+      </div>
+    </a>
+  );
+}
+
 
   useEffect(() => {
     const onResize = () => {
@@ -138,8 +173,8 @@ export default function HomePage() {
         </div>
         <figure className="card p-4">
           <Image
-            src="/images/tokenomics-wheel.png"
-            alt="Tokenomics wheel"
+            src="/images/jiff-records.jpg"
+            alt="Jiff Records"
             width={900}
             height={900}
             className="w-full rounded-xl"
@@ -185,8 +220,8 @@ export default function HomePage() {
               <li>• 2× Guinness World Records</li>
             </ul>
             <p className="mt-4 text-white/50 text-sm">
-              <b>Disclaimer:</b> Based Jiff is a community fan token and is not affiliated with the real Jiffpom brand.
-              No promises, no expectations—just dogs and fun.
+              <b>Disclaimer:</b> Based Jiff is a community fan token on Base and is celebrating the Jiffpom brand.
+              Biggest Richest Dogfluencer in the world, no expectations—just dogs and fun.
             </p>
           </div>
           <figure className="card p-4">
@@ -200,43 +235,58 @@ export default function HomePage() {
       </section>
 
       {/* FAN FLAIR */}
-      <section id="fan" className="container-tight py-14">
-        <h2 className="text-3xl md:text-4xl font-extrabold">Jiffpom Fan Flair</h2>
+<section id="fan" className="container-tight py-14">
+  <h2 className="text-3xl md:text-4xl font-extrabold">Jiffpom Fan Flair</h2>
+  <p className="mt-2 text-white/60 text-sm">
+    Fans call Jiffpom the most famous—maybe even the richest—good dog on the planet.
+    This is a based community fan page; Jiffpom is the most famous dog on the base network.
+  </p>
 
-        {/* YouTube embed */}
-        <div className="mt-6 card p-0 overflow-hidden">
-          <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
-            <iframe
-              src={`https://www.youtube.com/embed/${YT_VIDEO_ID}`}
-              title="Jiffpom on YouTube"
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
+  <div className="mt-6 grid md:grid-cols-3 gap-6">
+    {/* YouTube embed (2 columns on md+) */}
+    <div className="md:col-span-2">
+      <div className="card p-0 overflow-hidden">
+        <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
+          <iframe
+            src={`https://www.youtube.com/embed/${YT_VIDEO_ID}`}
+            title="Jiffpom on YouTube"
+            className="w-full h-full"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
         </div>
+      </div>
+    </div>
 
-        {/* Social boxes */}
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          <a href={LINKS.INSTAGRAM} target="_blank" rel="noopener noreferrer" className="card p-6 hover:bg-white/10 transition">
-            <div className="text-sm text-white/60">Instagram</div>
-            <div className="mt-1 font-semibold">Follow Jiffpom</div>
-            <p className="mt-2 text-white/70 text-sm">Daily cute drops and reels.</p>
-          </a>
-
-          <a href={LINKS.TIKTOK} target="_blank" rel="noopener noreferrer" className="card p-6 hover:bg-white/10 transition">
-            <div className="text-sm text-white/60">TikTok</div>
-            <div className="mt-1 font-semibold">Viral Tricks</div>
-            <p className="mt-2 text-white/70 text-sm">Shorts, tricks, and trends.</p>
-          </a>
-
-          <a href={LINKS.YOUTUBE} target="_blank" rel="noopener noreferrer" className="card p-6 hover:bg-white/10 transition">
-            <div className="text-sm text-white/60">YouTube</div>
-            <div className="mt-1 font-semibold">Classic Jiff</div>
-            <p className="mt-2 text-white/70 text-sm">Compilations and throwbacks.</p>
-          </a>
-        </div>
-      </section>
+    {/* Official Jiff socials (ordered by biggest audience) */}
+    <div className="space-y-4">
+      <SocialCard
+        label={`Instagram • ${JIFF_STATS.INSTAGRAM}+`}
+        tagline="Daily cute drops, reels, and red-carpet moments."
+        href={JIFF_LINKS.INSTAGRAM}
+        Icon={() => (
+          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.6.6.3 1 .6 1.5 1.1.5.5.8.9 1.1 1.5.3.5.5 1.3.6 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.6 2.5-.3.6-.6 1-1.1 1.5-.5.5-.9.8-1.5 1.1-.5.3-1.3.5-2.5.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.6-.6-.3-1-.6-1.5-1.1-.5-.5-.8-.9-1.1-1.5-.3-.5-.5-1.3-.6-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .6-2.5.3-.6.6-1 1.1-1.5.5-.5.9-.8 1.5-1.1.5-.3 1.3-.5 2.5-.6C8.4 2.2 8.8 2.2 12 2.2zm0 5.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.1-2.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
+        )}
+      />
+      <SocialCard
+        label={`TikTok • ${JIFF_STATS.TIKTOK}+`}
+        tagline="Tricks, trends, and blink-and-you-miss-it pawsomeness."
+        href={JIFF_LINKS.TIKTOK}
+        Icon={() => (
+          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M21 8.1a6.8 6.8 0 0 1-4-1.3v7.3a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.2.1v2.6a3.5 3.5 0 1 0 2.2 3.2V2h2.5c.4 1.9 1.9 3.5 3.8 3.9v2.2z"/></svg>
+        )}
+      />
+      <SocialCard
+        label={`YouTube • ${JIFF_STATS.YOUTUBE}+`}
+        tagline="Classic compilations, throwbacks, and longer adventures."
+        href={JIFF_LINKS.YOUTUBE}
+        Icon={() => (
+          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M23 7.1a3.1 3.1 0 0 0-2.2-2.2C18.8 4.4 12 4.4 12 4.4s-6.8 0-8.8.5A3.1 3.1 0 0 0 1 7.1 32 32 0 0 0 .5 12 32 32 0 0 0 1 16.9a3.1 3.1 0 0 0 2.2 2.2c2 .5 8.8.5 8.8.5s6.8 0 8.8-.5A3.1 3.1 0 0 0 23 16.9 32 32 0 0 0 23.5 12 32 32 0 0 0 23 7.1zM9.8 15.2V8.8l6 3.2-6 3.2z"/></svg>
+        )}
+      />
+    </div>
+  </div>
+</section>
 
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 py-14">
@@ -244,15 +294,15 @@ export default function HomePage() {
         <div className="mt-6 space-y-4">
           <details className="card p-5">
             <summary className="cursor-pointer font-semibold">Is this official Jiff?</summary>
-            <p className="mt-3 text-white/70">No. This is a community fan token. Not affiliated with the real Jiffpom brand.</p>
+            <p className="mt-3 text-white/70">No. This is a based community fan token. Celebrating with the real most based Jiffpom.</p>
           </details>
           <details className="card p-5">
             <summary className="cursor-pointer font-semibold">Which chain?</summary>
-            <p className="mt-3 text-white/70">Base.</p>
+            <p className="mt-3 text-white/70">Base Network. Coinbases layer 2 ETH chain. Low gas. Fast transaction speeds.</p>
           </details>
           <details className="card p-5">
             <summary className="cursor-pointer font-semibold">Taxes?</summary>
-            <p className="mt-3 text-white/70">0/0. Liquidity burned/locked.</p>
+            <p className="mt-3 text-white/70">Fair launched on ape store with 0/0 taxes. Liquidity burnt.</p>
           </details>
         </div>
       </section>

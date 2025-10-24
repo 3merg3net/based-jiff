@@ -1,5 +1,6 @@
 import "./globals.css";
 import FloatingPaws from "./components/FloatingPaws"; 
+import StickyCTA from "./components/StickyCTA";
 
 export const metadata = {
   title: "Based Jiff — The goodest dog on Base",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-orbs" />
         <FloatingPaws />
         {children}
+        <StickyCTA />
       </body>
     </html>
   );
