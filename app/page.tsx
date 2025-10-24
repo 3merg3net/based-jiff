@@ -144,7 +144,7 @@ function SocialCard({
               <a href={LINKS.CHART} target="_blank" rel="noopener noreferrer" className="btn-ghost">Chart</a>
             </div>
             <div className="mt-6 text-xs text-white/50 space-x-4">
-              <span><b>CA:</b> {CONTRACT_CA}</span>
+              <span><b>CA:</b> {0x0e9d2c3f0d69e0e457b35e4a9e192d8895d120f8}</span>
               <span><b>Chain:</b> Base</span>
             </div>
           </div>
