@@ -5,6 +5,12 @@ import { useState, useEffect } from "react";
 import { LINKS, CONTRACT_CA, YT_VIDEO_ID } from "./config";
 import FloatingPaws from "./components/FloatingPaws";
 import { JIFF_LINKS, JIFF_STATS } from "./config";
+import VideoWhenVisible from "./components/VideoWhenVisible";
+import VideoClickToPlay from "./components/VideoClickToPlay";
+import VideoThumbnailLink from "./components/VideoThumbnailLink";
+
+
+
 
 export default function HomePage() {
   const [open, setOpen] = useState(false);
@@ -195,26 +201,20 @@ function SocialCard({
       </section>
 
       {/* HOW TO BUY */}
-      <section id="how" className="container-tight py-12">
-        <h2 className="text-3xl md:text-4xl font-extrabold">How to Buy</h2>
-        <div className="grid md:grid-cols-3 gap-6 mt-6">
-          <div className="card p-6">
-            <Image src="/images/how-wallet.png" alt="Create a wallet" width={160} height={160} className="h-20 w-auto mb-3" />
-            <div className="font-semibold">Create a wallet</div>
-            <p className="text-sm text-white/70 mt-1">Coinbase Wallet or MetaMask.</p>
-          </div>
-          <div className="card p-6">
-            <Image src="/images/how-bridge.png" alt="Bridge to Base" width={160} height={160} className="h-20 w-auto mb-3" />
-            <div className="font-semibold">Bridge to Base</div>
-            <p className="text-sm text-white/70 mt-1">Use the official Base bridge.</p>
-          </div>
-          <div className="card p-6">
-            <Image src="/images/how-swap.png" alt="Buy $JIFF" width={160} height={160} className="h-20 w-auto mb-3" />
-            <div className="font-semibold">Buy $JIFF</div>
-            <p className="text-sm text-white/70 mt-1">Swap on your favorite DEX.</p>
-          </div>
-        </div>
-      </section>
+<section id="how" className="container-tight py-12">
+  <h2 className="text-3xl md:text-4xl font-extrabold mb-6">How to Buy</h2>
+  <div className="card overflow-hidden p-0">
+    <Image
+      src="/images/how-to-buy.png"
+      alt="How to Buy $JIFF"
+      width={1000}
+      height={400}
+      className="w-full h-auto object-contain"
+      priority
+    />
+  </div>
+</section>
+
 
       {/* ABOUT */}
       <section id="about" className="container-tight py-14">
@@ -251,54 +251,102 @@ function SocialCard({
   <h2 className="text-3xl md:text-4xl font-extrabold">Jiffpom Fan Flair</h2>
   <p className="mt-2 text-white/60 text-sm">
     Fans call Jiffpom the most famous—maybe even the richest—good dog on the planet.
-    This is a based community fan page; Jiffpom is the most famous dog on the base network.
+    This is a community fan page; not affiliated with the official brand.
   </p>
 
-  <div className="mt-6 grid md:grid-cols-3 gap-6">
-    {/* YouTube embed (2 columns on md+) */}
-    <div className="md:col-span-2">
-      <div className="card p-0 overflow-hidden">
-        <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
-          <iframe
-            src={`https://www.youtube.com/embed/${YT_VIDEO_ID}`}
-            title="Jiffpom on YouTube"
-            className="w-full h-full"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        </div>
-      </div>
+  <div className="mt-6 grid md:grid-cols-3 gap-6 auto-rows-fr items-stretch">
+    {/* YouTube */}
+<div className="card p-0 h-full flex flex-col">
+  <div className="relative aspect-video w-full">
+    <VideoThumbnailLink />
+  </div>
+
+  <div className="p-5 flex items-center gap-4 mt-auto">
+    <div className="h-10 w-10 grid place-items-center rounded-xl bg-white/10 text-white/80">
+      <svg viewBox="0 0 24 24" className="w-6 h-6">
+        <path
+          fill="currentColor"
+          d="M23 7.1a3.1 3.1 0 0 0-2.2-2.2C18.8 4.4 12 4.4 12 4.4s-6.8 0-8.8.5A3.1 3.1 0 0 0 1 7.1 32 32 0 0 0 .5 12 32 32 0 0 0 1 16.9a3.1 3.1 0 0 0 2.2 2.2c2 .5 8.8.5 8.8.5s6.8 0 8.8-.5A3.1 3.1 0 0 0 23 16.9 32 32 0 0 0 23.5 12 32 32 0 0 0 23 7.1zM9.8 15.2V8.8l6 3.2-6 3.2z"
+        />
+      </svg>
     </div>
 
-    {/* Official Jiff socials (ordered by biggest audience) */}
-    <div className="space-y-4">
-      <SocialCard
-        label={`Instagram • ${JIFF_STATS.INSTAGRAM}+`}
-        tagline="Daily cute drops, reels, and red-carpet moments."
-        href={JIFF_LINKS.INSTAGRAM}
-        Icon={() => (
-          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.6.6.3 1 .6 1.5 1.1.5.5.8.9 1.1 1.5.3.5.5 1.3.6 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.6 2.5-.3.6-.6 1-1.1 1.5-.5.5-.9.8-1.5 1.1-.5.3-1.3.5-2.5.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.6-.6-.3-1-.6-1.5-1.1-.5-.5-.8-.9-1.1-1.5-.3-.5-.5-1.3-.6-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .6-2.5.3-.6.6-1 1.1-1.5.5-.5.9-.8 1.5-1.1.5-.3 1.3-.5 2.5-.6C8.4 2.2 8.8 2.2 12 2.2zm0 5.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.1-2.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/></svg>
-        )}
-      />
-      <SocialCard
-        label={`TikTok • ${JIFF_STATS.TIKTOK}+`}
-        tagline="Tricks, trends, and blink-and-you-miss-it pawsomeness."
-        href={JIFF_LINKS.TIKTOK}
-        Icon={() => (
-          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M21 8.1a6.8 6.8 0 0 1-4-1.3v7.3a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.2.1v2.6a3.5 3.5 0 1 0 2.2 3.2V2h2.5c.4 1.9 1.9 3.5 3.8 3.9v2.2z"/></svg>
-        )}
-      />
-      <SocialCard
-        label={`YouTube • ${JIFF_STATS.YOUTUBE}+`}
-        tagline="Classic compilations, throwbacks, and longer adventures."
-        href={JIFF_LINKS.YOUTUBE}
-        Icon={() => (
-          <svg viewBox="0 0 24 24" className="w-6 h-6"><path fill="currentColor" d="M23 7.1a3.1 3.1 0 0 0-2.2-2.2C18.8 4.4 12 4.4 12 4.4s-6.8 0-8.8.5A3.1 3.1 0 0 0 1 7.1 32 32 0 0 0 .5 12 32 32 0 0 0 1 16.9a3.1 3.1 0 0 0 2.2 2.2c2 .5 8.8.5 8.8.5s6.8 0 8.8-.5A3.1 3.1 0 0 0 23 16.9 32 32 0 0 0 23.5 12 32 32 0 0 0 23 7.1zM9.8 15.2V8.8l6 3.2-6 3.2z"/></svg>
-        )}
-      />
+    <div>
+      <div className="font-semibold">YouTube • {JIFF_STATS.YOUTUBE}+</div>
+      <div className="text-xs text-white/60">
+        Official Jiffpom Channel — cute compilations & adventures.
+      </div>
     </div>
   </div>
+</div>
+
+
+
+
+    {/* Instagram */}
+    <a
+      href={JIFF_LINKS.INSTAGRAM}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="card p-0 hover:bg-white/5 transition h-full flex flex-col"
+      aria-label="Instagram — Daily cute drops & reels"
+    >
+      <div className="relative aspect-video w-full">
+        <Image
+          src="/images/ig-preview.jpg"
+          alt="Instagram preview"
+          fill
+          sizes="(max-width:768px) 100vw, 33vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="p-5 flex items-center gap-4 mt-auto">
+        <div className="h-10 w-10 grid place-items-center rounded-xl bg-white/10 text-white/80">
+          <svg viewBox="0 0 24 24" className="w-6 h-6">
+            <path fill="currentColor" d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .3 2.5.6.6.3 1 .6 1.5 1.1.5.5.8.9 1.1 1.5.3.5.5 1.3.6 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 2-.6 2.5-.3.6-.6 1-1.1 1.5-.5.5-.9.8-1.5 1.1-.5.3-1.3.5-2.5.6-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.3-2.5-.6-.6-.3-1-.6-1.5-1.1-.5-.5-.8-.9-1.1-1.5-.3-.5-.5-1.3-.6-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-2 .6-2.5.3-.6.6-1 1.1-1.5.5-.5.9-.8 1.5-1.1.5-.3 1.3-.5 2.5-.6C8.4 2.2 8.8 2.2 12 2.2zm0 5.1a4.7 4.7 0 1 1 0 9.4 4.7 4.7 0 0 1 0-9.4zm6.1-2.1a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
+          </svg>
+        </div>
+        <div>
+          <div className="font-semibold">Instagram • {JIFF_STATS.INSTAGRAM}+</div>
+          <div className="text-xs text-white/60">Daily cute drops & reels.</div>
+        </div>
+      </div>
+    </a>
+
+    {/* TikTok */}
+    <a
+      href={JIFF_LINKS.TIKTOK}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="card p-0 hover:bg-white/5 transition h-full flex flex-col"
+      aria-label="TikTok — Tricks, trends & shorts"
+    >
+      <div className="relative aspect-video w-full">
+        <Image
+          src="/images/tt-preview.jpg"
+          alt="TikTok preview"
+          fill
+          sizes="(max-width:768px) 100vw, 33vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="p-5 flex items-center gap-4 mt-auto">
+        <div className="h-10 w-10 grid place-items-center rounded-xl bg-white/10 text-white/80">
+          <svg viewBox="0 0 24 24" className="w-6 h-6">
+            <path fill="currentColor" d="M21 8.1a6.8 6.8 0 0 1-4-1.3v7.3a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.2.1v2.6a3.5 3.5 0 1 0 2.2 3.2V2h2.5c.4 1.9 1.9 3.5 3.8 3.9v2.2z"/>
+          </svg>
+        </div>
+        <div>
+          <div className="font-semibold">TikTok • {JIFF_STATS.TIKTOK}+</div>
+          <div className="text-xs text-white/60">Tricks, trends & shorts.</div>
+        </div>
+      </div>
+    </a>
+  </div>
 </section>
+
+
+
 
       {/* FAQ */}
       <section id="faq" className="max-w-4xl mx-auto px-4 py-14">
