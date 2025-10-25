@@ -138,13 +138,35 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="mt-6 text-xs text-white/50 space-x-4 font-mono">
-              <span>
-                <b>CA:</b>{" "}
-                {ENV.CA ? `${ENV.CA.slice(0, 6)}…${ENV.CA.slice(-4)}` : "—"}
-              </span>
-              <span><b>Chain:</b> {ENV.CHAIN}</span>
-            </div>
+            <div className="mt-6 text-xs text-white/60 font-mono leading-relaxed">
+  <div className="flex flex-wrap items-center gap-2">
+    <b>CA:</b>
+    <span id="contract-address" className="break-all">
+      {ENV.CA || "—"}
+    </span>
+    <button
+      onClick={() => {
+        if (ENV.CA) {
+          navigator.clipboard.writeText(ENV.CA);
+          const btn = document.getElementById("copy-btn");
+          if (btn) {
+            btn.textContent = "✅ Copied!";
+            setTimeout(() => (btn.textContent = "📋 Copy"), 1500);
+          }
+        }
+      }}
+      id="copy-btn"
+      className="ml-2 text-blue-400 hover:text-blue-300 transition"
+    >
+      📋 Copy
+    </button>
+  </div>
+  <div>
+    <b>Chain:</b> {ENV.CHAIN}
+  </div>
+</div>
+
+
           </div>
 
           <div className="relative">

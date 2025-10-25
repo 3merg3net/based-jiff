@@ -79,3 +79,7 @@ body {
   /* Our global paws layer uses animation: drift; kill it here */
   svg[style*="animation: drift"] { animation: none !important; opacity: .18 !important; }
 }
+
+button {
+  cursor: pointer;
+}
